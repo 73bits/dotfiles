@@ -1,0 +1,39 @@
+loadkeys us
+timedatectl set-timezone Asia/Kolkata
+timedatectl set-ntp true
+
+gdisk /dev/sda
+	/boot	: type - EF00 (500M, EFI System)
+	/	: type - 8309 (size, Linux LUKS)
+
+cryptsetup -v luksFormat /dev/sda2
+cryptsetup open /dev/sda2 root
+mkfs.ext4 /dev/mapper/root
+mkfs.fat -F32 /dev/sda1
+
+mount /dev/mapper/root /mnt
+mount --mkdir /dev/sda1 /mnt/boot
+
+pacstrap -K /mnt base linux linux-firmware vim
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+
+ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+hwclock --systohc
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "KEYMAP=us" > /etc/vconsole.conf
+echo "arch" > /etc/hostname
+
+vim /etc/mkinitcpio.conf
+	HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
+mkinicpio -P
+
+bootctl install
+vim /boot/loader/entries/arch.conf
+	title	Arch Linux
+	linux	/vmlinuz-linux
+	initrd	/initramfs-linux.img
+	options	rd.luks.name={UUID-UUID-UUID-UUID-UUID}=root root=/dev/mapper/root
+
+passwd
