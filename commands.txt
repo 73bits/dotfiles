@@ -37,3 +37,7 @@ vim /boot/loader/entries/arch.conf
 	options	rd.luks.name={UUID-UUID-UUID-UUID-UUID}=root root=/dev/mapper/root
 
 passwd
+
+exit
+umount -R /mnt
+reboot
