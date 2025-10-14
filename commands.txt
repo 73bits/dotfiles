@@ -41,3 +41,21 @@ passwd
 exit
 umount -R /mnt
 reboot
+
+pacman -S polkit
+
+vim /etc/systemd/network/10-wired.network
+	[Match]
+	Name={interface-name}
+
+	[Network]
+	DHCP=ipv4
+	LinkLocalAddressing=no
+	IPv6AcceptRA=no
+
+systemctl enable --now systemd-networkd
+systemctl enable --now systemd-resolved
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+curl https://github.com/73bits.keys > .ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
