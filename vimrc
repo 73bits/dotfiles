@@ -5,10 +5,12 @@ set fillchars+=eob:\
 let mapleader = " "
 
 inoremap ii <Esc>
+nnoremap <C-j> 4j
+nnoremap <C-k> 4k
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
 nnoremap <C-l> :ls<CR>
-nnoremap <Leader>v <C-v>
+nnoremap <leader>v <C-v>
 nnoremap <leader>e :call ToggleNetrw()<CR>
 
 function! ToggleNetrw()
