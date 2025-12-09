@@ -2,16 +2,22 @@ source $VIMRUNTIME/defaults.vim
 
 set nu
 set fillchars+=eob:\ 
-let mapleader = " "
+set viminfofile=$VIM_INFO
 
-inoremap ii <Esc>
+let mapleader = " "
+colorscheme default
+
 nnoremap <C-j> 4j
 nnoremap <C-k> 4k
+vnoremap <C-j> 4j
+vnoremap <C-k> 4k
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
 nnoremap <C-l> :ls<CR>
 nnoremap <leader>v <C-v>
 nnoremap <leader>e :call ToggleNetrw()<CR>
+
+autocmd FileType * set formatoptions-=cro
 
 function! ToggleNetrw()
         if exists("t:netrw_bufnr")
