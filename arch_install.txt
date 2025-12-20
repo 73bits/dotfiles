@@ -1,3 +1,5 @@
+# minimal arch install with luks, systemd-boot, systemd-networkd
+
 loadkeys us
 timedatectl set-timezone Asia/Kolkata
 timedatectl set-ntp true
