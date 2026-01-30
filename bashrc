@@ -2,8 +2,17 @@
 
 [[ $- != *i* ]] && return
 
+source $HOME/.config/git-completion.bash
+
 alias ls='ls $LS_OPTIONS'
+alias ll='ls -l'
 alias ip='ip --color=auto'
 alias grep='grep --color=auto'
 
-PS1='\[\e[38;5;201;1m\][\[\e[0m\] \[\e[38;5;214;1m\]\u\[\e[38;5;51m\]@\[\e[38;5;157m\]\h\[\e[0m\] \[\e[38;5;39;1m\]\W\[\e[0m\] \[\e[38;5;201;1m\]]\[\e[38;5;129m\] \[\e[38;5;51m\]\$\[\e[97m\] \[\e[0m\]'
+PROMPT_COMMAND='
+if [ $? -ne 0 ]; then
+	PS1="\[\e[38;5;196;1m\]> \[\e[0m\]"
+else
+	PS1="\[\e[38;5;51;1m\]> \[\e[0m\]"
+fi
+'
