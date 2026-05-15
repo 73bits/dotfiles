@@ -1,12 +1,12 @@
 source $VIMRUNTIME/defaults.vim
 
 set nu
-set fillchars+=eob:\ 
+" set fillchars+=eob:\
 set viminfofile=$VIM_INFO
+set background=dark
+colorscheme elflord
 
 let mapleader = " "
-colorscheme default
-
 nnoremap <C-j> 4j
 nnoremap <C-k> 4k
 vnoremap <C-j> 4j
